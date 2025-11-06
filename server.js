@@ -14,6 +14,10 @@ app.use("/styles", express.static(path.join(__dirname, "styles")));
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+// serve /public as static
+app.use('/public', express.static('public'));
+
 // Session setup
 app.use(
   session({

@@ -1,42 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="../styles/main.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="/public/style.css" />
+  </head>
+  <body>
     <header>
-        <div class="branding">
-            <h1><a href="/">MoreRAM?</a></h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="auth-links">
-            <a href="/users/login" style="color: white">Login</a> | <a href="/users/register" style="color: white">Register</a>
-        </div>
+      <h1>About <%= name %></h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about" aria-current="page">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </header>
-
-    <section class="page-content">
-        <h2>About Us</h2>
-        <p>Lorem ipsum dolor sit amet</p>
-    </section>
-
+    <main>
+      <section>
+        <h2>Who I Am</h2>
+        <p><%= description %></p>
+      </section>
+    </main>
     <footer>
-        <ul>
-            <li><a href="/terms">Terms & Conditions</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-        </ul>
-        <p>&copy; 2025 MoreRAM?. All rights reserved.</p>
+      <p>
+        © <span id="year"><%= new Date().getFullYear() %></span> <%= name %>.
+        All rights reserved.
+      </p>
     </footer>
-
-</body>
+  </body>
 </html>
