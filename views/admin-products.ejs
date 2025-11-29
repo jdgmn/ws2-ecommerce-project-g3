@@ -1,0 +1,25 @@
+<h1>Product Management</h1>
+<a href="/admin/products/new">Add New Product</a>
+<table border="1">
+  <tr>
+    <th>Name</th><th>Description</th><th>Price</th><th>Image</th><th>Actions</th>
+  </tr>
+  <% products.forEach(product => { %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= product.description %></td>
+      <td>$<%= product.price.toFixed(2) %></td>
+      <td>
+        <% if (product.imageUrl) { %>
+          <img src="<%= product.imageUrl %>" width="50"/>
+        <% } %>
+      </td>
+      <td>
+        <a href="/admin/products/edit/<%= product._id %>">Edit</a>
+        <form action="/admin/products/delete/<%= product._id %>" method="POST" style="display:inline;">
+          <button type="submit" onclick="return confirm('Delete this product?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>

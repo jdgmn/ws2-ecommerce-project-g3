@@ -2,7 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
-const session = require("express-session"); // Added for user sessions
+const session = require("express-session");
 require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,9 +43,11 @@ app.use(express.static(path.join(__dirname, "public")));
 const indexRoute = require("./routes/index");
 const usersRoute = require("./routes/users");
 const passwordRoute = require("./routes/password");
+const adminProductsRouter = require("./routes/adminProducts");
 app.use("/", indexRoute);
 app.use("/users", usersRoute);
 app.use("/password", passwordRoute);
+app.use("/admin/products", adminProductsRouter);
 
 // MongoDB Setup
 const uri = process.env.MONGO_URI;

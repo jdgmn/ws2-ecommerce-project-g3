@@ -21,13 +21,13 @@ router.get("/register", (req, res) => {
 
 // Registration (POST)
 router.post("/register", async (req, res) => {
-  const token = req.body["cf-turnstile-response"];
-  const result = await verifyTurnstile(token, req.ip);
-  if (!result.success) {
-    return res
-      .status(400)
-      .render("register", { error: "Verification failed. Please try again." });
-  }
+  //const token = req.body["cf-turnstile-response"];
+  //const result = await verifyTurnstile(token, req.ip);
+  //if (!result.success) {
+  //  return res
+  //    .status(400)
+  //    .render("register", { error: "Verification failed. Please try again." });
+  //}
   try {
     const db = req.app.locals.client.db(req.app.locals.dbName);
     const usersCollection = db.collection("users");
@@ -161,13 +161,13 @@ router.get("/login", (req, res) => {
 });
 // handle login form submission
 router.post("/login", async (req, res) => {
-  const token = req.body["cf-turnstile-response"];
-  const result = await verifyTurnstile(token, req.ip);
-  if (!result.success) {
-    return res
-      .status(400)
-      .render("login", { error: "Verification failed. Please try again." });
-  }
+  //const token = req.body["cf-turnstile-response"];
+  //const result = await verifyTurnstile(token, req.ip);
+  //if (!result.success) {
+  //  return res
+  //    .status(400)
+  //    .render("login", { error: "Verification failed. Please try again." });
+  //}
   try {
     const db = req.app.locals.client.db(req.app.locals.dbName);
     const usersCollection = db.collection("users");
