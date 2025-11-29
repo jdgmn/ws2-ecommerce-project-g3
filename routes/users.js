@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
@@ -6,7 +8,6 @@ const saltRounds = 12;
 const { MongoClient } = require("mongodb");
 const { Resend } = require("resend");
 const resend = new Resend(process.env.RESEND_API_KEY);
-require("dotenv").config();
 
 // mongoDB setup
 const uri = process.env.MONGO_URI;
