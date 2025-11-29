@@ -15,11 +15,14 @@ router.get("/products", (req, res) => {
   res.render("products", { title: "Products" });
 });
 
-// about
 router.get("/about", (req, res) => {
   res.render("about", {
     title: "About Me",
+<<<<<<< HEAD
     name: "Jonah De Guzman",
+=======
+    name: "Your Full Name",
+>>>>>>> cf129f9a4aa44a1602a610d39c91fc7a51637b29
     description:
       "I am a web systems student building projects with Node.js, Express, and EJS.",
   });
