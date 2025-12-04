@@ -4,15 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .dashboard-section h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .dashboard-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .dashboard-section p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .dashboard-section ul {
+            margin-left: 20px;
+        }
+        .dashboard-section li {
+            margin-bottom: 10px;
+        }
+        .dashboard-section em {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-
+    <!-- Header -->
     <header>
         <div class="branding">
-            <h1><a href="/">MoreRAM?</a></h1>
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" />
+            <h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
         </div>
-        <nav>
+        <nav class="header-nav">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/products">Products</a></li>
@@ -21,22 +50,67 @@
             </ul>
         </nav>
         <div class="auth-links">
-            <a href="/users/login" style="color: white">Login</a> | <a href="/users/register" style="color: white">Register</a>
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
         </div>
     </header>
+    <section class="dashboard-section">
+        <h1>Privacy Policy</h1>
 
-    <section class="page-content">
-        <h2>Privacy Policy</h2>
-        <p>Lorem ipsum dolor sit amet</p>
-    </section>
+        <h2>Introduction</h2>
+        <p>At Delulu Delata, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make a purchase. By using our services, you consent to the practices described in this policy.</p>
 
-    <footer>
+        <h2>Information We Collect</h2>
+        <p>We may collect the following types of information:</p>
         <ul>
-            <li><a href="/terms">Terms & Conditions</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
+            <li>Personal information (name, email, address, phone number) provided during registration or checkout</li>
+            <li>Payment information (processed securely through third-party providers)</li>
+            <li>Browsing data (IP address, browser type, pages visited) for website improvement</li>
+            <li>Cookies and similar technologies to enhance user experience</li>
         </ul>
-        <p>&copy; 2025 MoreRAM?. All rights reserved.</p>
-    </footer>
 
+        <h2>How We Use Your Information</h2>
+        <p>Your information is used to:</p>
+        <ul>
+            <li>Process and fulfill orders</li>
+            <li>Provide customer support</li>
+            <li>Send order confirmations and updates</li>
+            <li>Improve our website and services</li>
+            <li>Comply with legal obligations</li>
+        </ul>
+
+        <h2>Information Sharing</h2>
+        <p>We do not sell, trade, or rent your personal information to third parties. We may share information only in the following cases:</p>
+        <ul>
+            <li>With service providers for order fulfillment (e.g., shipping companies)</li>
+            <li>To comply with legal requirements</li>
+            <li>To protect our rights or the safety of others</li>
+        </ul>
+
+        <h2>Data Security</h2>
+        <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. Payment information is encrypted and processed securely.</p>
+
+        <h2>Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Access your personal information</li>
+            <li>Correct inaccuracies in your data</li>
+            <li>Request deletion of your information</li>
+            <li>Opt-out of marketing communications</li>
+        </ul>
+
+        <h2>Cookies</h2>
+        <p>Our website uses cookies to improve your browsing experience. You can control cookie settings through your browser preferences.</p>
+
+        <h2>Changes to this Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have questions about this Privacy Policy, please contact us at privacy@deluludelata.com or through our contact form.</p>
+
+        <p><em>This Privacy Policy was last updated on [Date].</em></p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
 </body>
 </html>

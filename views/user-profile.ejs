@@ -1,43 +1,149 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <meta charset="UTF-8" />
-  </head>
-  <body>
-    <h1>User Profile</h1>
-    <% if (updated) { %>
-    <p style="color: green">Profile updated successfully.</p>
-    <% } %>
-    <section>
-      <h2>Account Information</h2>
-      <p><strong>Email:</strong> <%= user.email %></p>
-      <% if (user.firstName || user.lastName) { %>
-      <p>
-        <strong>Name:</strong>
-        <%= user.firstName || "" %> <%= user.lastName || "" %>
-      </p>
-      <% } %>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .profile-section {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: var(--bg-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        .profile-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .profile-section p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .success-message {
+            color: #28a745;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 0.5rem;
+        }
+        .account-info {
+            background: var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .account-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        .form-group textarea, .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .form-group textarea:focus, .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-actions button {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-actions button:hover {
+            background: var(--secondary-color);
+        }
+        .form-actions a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .form-actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/user/dashboard">Dashboard</a></li>
+                <li><a href="/user/profile" class="active">Profile</a></li>
+                <li><a href="/user/orders">Orders</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <span>Welcome, <%= user.firstName %>!</span>
+            <a href="/users/logout">Logout</a>
+        </div>
+    </header>
+    <section class="profile-section">
+        <h2><%= title %></h2>
+        <% if (updated) { %>
+        <p class="success-message">Profile updated successfully.</p>
+        <% } %>
+        <div>
+            <h3>Account Information</h3>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <% if (user.firstName || user.lastName) { %>
+            <p><strong>Name:</strong> <%= user.firstName || "" %> <%= user.lastName || "" %></p>
+            <% } %>
+        </div>
     </section>
-    <section>
-      <h2>Edit Contact Details</h2>
-      <form action="/user/profile" method="POST">
-        <p>
-          <label for="address">Address:</label><br />
-          <textarea id="address" name="address" rows="3" cols="40">
-<%= user.address || "" %></textarea
-          >
-        </p>
-        <p>
-          <label for="contactNumber">Contact Number:</label><br />
-          <input type="text" id="contactNumber" name="contactNumber" value="<%=
-          user.contactNumber || "" %>" />
-        </p>
-        <p>
-          <button type="submit">Save Profile</button>
-          <a href="/user/dashboard">Back to Dashboard</a>
-        </p>
-      </form>
+    <section class="profile-section">
+        <h2>Edit Contact Details</h2>
+        <form action="/user/profile" method="POST">
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="3" placeholder="Enter your address"><%= user.address || "" %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="text" id="contactNumber" name="contactNumber" value="<%= user.contactNumber || "" %>" placeholder="Enter your contact number" />
+            </div>
+            <div class="form-actions">
+                <button type="submit">Save Profile</button>
+                <a href="/user/dashboard">Back to Dashboard</a>
+            </div>
+        </form>
     </section>
-  </body>
+    <footer>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
+</body>
 </html>

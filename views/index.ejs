@@ -1,89 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
-
-    <!-- site branding -->
+    <!-- Header -->
     <header>
         <div class="branding">
-            <h1><a href="/">MoreRAM?</a></h1>
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
         </div>
-        
-        <!-- nav bar -->
-        <nav>
+        <nav class="header-nav">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/products">Products</a></li>
+                <% if (isLoggedIn) { %>
+                <li><a href="<%= req.session.user.role === 'admin' ? '/users/admin' : '/user/dashboard' %>">Dashboard</a></li>
+                <% } %>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
-        
-        <!-- login / register buttons -->
         <div class="auth-links">
-            <a href="/users/login" style="color: white">Login</a> | <a href="/users/register" style="color: white">Register</a>
+            <% if (isLoggedIn) { %>
+            <span>Welcome, <%= req.session.user.firstName %>!</span>
+            <a href="/users/logout">Logout</a>
+            <% } else { %>
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
+            <% } %>
         </div>
     </header>
 
-    <!-- hero section -->
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-text">
-            <h2>Welcome to MoreRAM?</h2>
-            <p>Your one-stop shop for all your digital RAM needs.</p>
+        <div class="hero-content">
+            <h1>Welcome to Delulu Delata!</h1>
+            <p>Your one-stop shop for premium canned goods. Pag Delata ang Problema... Taste the difference!</p>
         </div>
     </section>
 
-    <!-- Ffeatured products -->
+    <!-- Featured Products -->
     <section class="featured-products">
         <h2>Featured Products</h2>
         <div class="product-list">
-            <div class="product-card">
-                <img src="/images/product1.jpg" alt="Product 1">
-                <h3>RAM Basic</h3>
-                <p>Great quality RAM for office use.</p>
-                <p>₱1599</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="/images/product2.jpg" alt="Product 2">
-                <h3>RAM Plus</h3>
-                <p>Durable and affordable for school projects and work.</p>
-                <p>₱2699</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="/images/product3.jpg" alt="Product 3">
-                <h3>RAM Premium</h3>
-                <p>Perfect for gaming.</p>
-                <p>₱3299</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="/images/product4.jpg" alt="Product 4">
-                <h3>RAM Pro</h3>
-                <p>High-quality RAM for all your needs.</p>
-                <p>₱4599</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+            <% if (featuredProducts && featuredProducts.length > 0) { %>
+                <% featuredProducts.forEach(product => { %>
+                    <div class="product-card">
+                        <img src="<%= product.imageUrl || '/public/images/default-can.png' %>" alt="<%= product.name %>">
+                        <h3><%= product.name %></h3>
+                        <p><%= product.description %></p>
+                        <div class="price">₱<%= product.price.toFixed(2) %></div>
+                        <a href="/products" class="add-to-cart" style="text-decoration: none;">Shop Now</a>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No products available at the moment. Please check back later!</p>
+            <% } %>
         </div>
     </section>
 
-    <!-- footer -->
+    <!-- Footer -->
     <footer>
         <ul>
             <li><a href="/terms">Terms & Conditions</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
         </ul>
-        <p>&copy; 2025 MoreRAM?. All rights reserved.</p>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
     </footer>
 
+    <!-- Dynamic Script -->
+    <script>
+        // Add sparkle effect to buttons on hover
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.add-to-cart, .submit-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    button.style.transform = 'scale(1.05)';
+                    button.style.boxShadow = '0 6px 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(255, 0, 127, 0.5)';
+                });
+                button.addEventListener('mouseleave', function() {
+                    button.style.transform = 'scale(1)';
+                    button.style.boxShadow = '0 4px 15px rgba(255, 0, 127, 0.3)';
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>

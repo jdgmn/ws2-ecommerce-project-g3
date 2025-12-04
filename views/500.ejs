@@ -1,73 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <title><%= title %></title>
+    <title>Delulu Delata | Error</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <style>
-      :root {
-        --fg: #111;
-        --muted: #666;
-        --accent: #2563eb;
-      }
-      body {
-        font-family: system-ui, Arial, sans-serif;
-        color: var(--fg);
-        display: flex;
-        min-height: 100dvh;
-      }
-      .wrap {
-        margin: auto;
-        max-width: 640px;
-        padding: 2rem;
-        text-align: center;
-      }
-      h1 {
-        font-size: 2.25rem;
-        margin: 0.25rem 0;
-      }
-      p.lead {
-        color: var(--muted);
-        margin: 0.25rem 0 1rem;
-      }
-      .links {
-        display: flex;
-        gap: 0.75rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 1rem;
-      }
-      .links a {
-        padding: 0.6rem 0.9rem;
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-        text-decoration: none;
-      }
-      .links a.primary {
-        border-color: var(--accent);
-        color: #fff;
-        background: var(--accent);
-      }
-    </style>
-  </head>
-  <body>
-    <main class="wrap" role="main" aria-labelledby="title">
-      <div aria-hidden="true" style="font-size: 4rem"></div>
-      <h1 id="title">Something went wrong</h1>
-      <p class="lead">
-        Please try again. If this keeps happening, return to the home page.
-      </p>
-      <div class="links">
-        <a href="/">Home</a>
-        <% if (user) { %>
-        <a href="/users/dashboard">Dashboard</a>
-        <a href="/users/logout">Logout</a>
-        <% } else { %>
-        <a href="/users/login">Login</a>
-        <a href="/users/register">Register</a>
-        <% } %>
-      </div>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
+        </div>
+    </header>
+    <main style="text-align:center; margin-top:2rem; padding: 2rem;">
+        <img src="/public/images/can-error.png" alt="Error Can" style="width: 120px; margin: 2rem auto;" />
+        <h1>Oops! Something went wrong.</h1>
+        <p>We're feeling a little delulu right now. Please try again or come back later.</p>
+        <div class="links" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+            <a href="/" class="submit-btn">Go to Home</a>
+            <a href="/products" class="submit-btn">Shop Canned Goods</a>
+            <a href="/contact" class="submit-btn">Contact Support</a>
+        </div>
     </main>
-  </body>
+    <footer style="text-align:center; margin-top:3rem; color:#7a6a53;">
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
+</body>
 </html>

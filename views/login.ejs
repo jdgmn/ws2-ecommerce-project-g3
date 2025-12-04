@@ -1,53 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/styles/main.css" />
-  </head>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
+        </div>
+    </header>
 
-  <body>
+    <!-- Login Form -->
     <div class="login-form-container">
-      <h1>Login</h1>
+        <h1>Login to Delulu Delata</h1>
 
-      <form action="/users/login" method="POST" class="login-form">
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+        <% if (locals.error) { %>
+            <p class="form-error"><%= error %></p>
+        <% } %>
+
+        <form action="/users/login" method="POST" class="login-form">
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= locals.email || '' %>" required />
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+
+            <!-- Turnstile widget -->
+            <div class="cf-turnstile" data-sitekey="<%= process.env.TURNSTILE_SITEKEY %>"></div>
+
+            <!-- Login button -->
+            <button type="submit" class="login-submit-btn">Login</button>
+        </form>
+
+        <!-- Turnstile script -->
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+        <div class="login-links">
+            <p><a href="/password/forgot">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="/users/register">Register here</a></p>
         </div>
-
-        <!-- Password -->
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-
-        <!-- Turnstile widget -->
-        <div
-          class="cf-turnstile"
-          data-sitekey="<%= process.env.TURNSTILE_SITEKEY %>"
-        ></div>
-
-        <!-- login button -->
-        <button type="submit" class="login-submit-btn">Login</button>
-      </form>
-
-      <!-- Turnstile script -->
-      <script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        async
-        defer
-      ></script>
-
-      <div class="login-links">
-        <p><a href="/password/forgot">Forgot Password?</a></p>
-        <p>
-          Don't have an account? <a href="/users/register">Register here</a>
-        </p>
-        <p><a href="/">Go Back</a></p>
-      </div>
     </div>
-  </body>
+
+    <!-- Footer -->
+    <footer>
+        <ul>
+            <li><a href="/terms">Terms & Conditions</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
+</body>
 </html>

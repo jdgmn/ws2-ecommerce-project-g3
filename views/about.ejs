@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta
-      name="description"
-      content="Learn more about <%= name %> — web systems developer and student innovator."
-    />
-    <meta
-      name="keywords"
-      content="about page, web systems, EJS, SEO, student project"
-    />
-    <meta name="author" content="<%= name %>" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="About <%= name %>" />
-    <meta property="og:description" content="<%= description %>" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/public/images/profile.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/public/style.css" />
-  </head>
-  <body>
-    <link rel="stylesheet" href="/public/style.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Header -->
     <header>
-      <h1>About <%= name %></h1>
-      <nav>
-        <a href="/" title="Go to homepage">Home</a>
-        <a href="/about" aria-current="page">About</a>
-        <a href="/contact" title="Go to contact page">Contact</a>
-      </nav>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <% if (isLoggedIn) { %>
+                <li><a href="<%= req.session.user.role === 'admin' ? '/users/admin' : '/user/dashboard' %>">Dashboard</a></li>
+                <% } %>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <% if (isLoggedIn) { %>
+            <span>Welcome, <%= req.session.user.firstName %>!</span>
+            <a href="/users/logout">Logout</a>
+            <% } else { %>
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
+            <% } %>
+        </div>
     </header>
-    <main role="main">
-      <section aria-labelledby="about-title">
-        <h2 id="about-title">Who I Am</h2>
-        <p><%= description %></p>
-      </section>
-    </main>
+
+    <!-- About Section -->
+    <section class="featured-products" style="text-align: center; max-width: 800px; margin: 2rem auto;">
+        <h2>Delulu is the Solulu</h2>
+        <p>We are passionate about providing premium canned goods that add flavor to your everyday meals. Our selection includes timeless classics like corned beef, tuna, and sardines, all sourced and prepared with care to ensure the highest quality.</p>
+        <p>At Delulu Delata, we believe that great food should be accessible, delicious, and ready whenever you need it. Founded to bring joy and convenience to kitchens everywhere, we're dedicated to making every can count.</p>
+        <h3>Why Choose Us?</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li>🌟 Premium quality ingredients</li>
+            <li>📦 Convenient and ready-to-eat</li>
+            <li>❤️ Perfect for every occasion</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
     <footer>
-      <p>
-        © <span id="year"><%= new Date().getFullYear() %></span> <%= name %>.
-        All rights reserved.
-      </p>
-      <p>
-        © <span id="year"><%= new Date().getFullYear() %></span> <%= name %>.
-        All rights reserved.
-      </p>
+        <ul>
+            <li><a href="/terms">Terms & Conditions</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
     </footer>
-  </body>
-  </body>
+</body>
 </html>

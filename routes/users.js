@@ -201,7 +201,11 @@ router.post("/login", async (req, res) => {
         isEmailVerified: user.isEmailVerified,
         accountStatus: user.accountStatus,
       };
-      res.redirect("/user/dashboard");
+      if (user.role === 'admin') {
+        res.redirect("/users/admin");
+      } else {
+        res.redirect("/user/dashboard");
+      }
     } else {
       res.send("Invalid password.");
     }

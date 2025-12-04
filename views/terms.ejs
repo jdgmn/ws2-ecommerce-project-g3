@@ -4,15 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .dashboard-section h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .dashboard-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .dashboard-section h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .dashboard-section p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .dashboard-section ul {
+            margin-left: 20px;
+        }
+        .dashboard-section li {
+            margin-bottom: 10px;
+        }
+        .dashboard-section em {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-
+    <!-- Header -->
     <header>
         <div class="branding">
-            <h1><a href="/">MoreRAM?</a></h1>
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" />
+            <h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
         </div>
-        <nav>
+        <nav class="header-nav">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/products">Products</a></li>
@@ -21,22 +55,56 @@
             </ul>
         </nav>
         <div class="auth-links">
-            <a href="/users/login" style="color: white">Login</a> | <a href="/users/register" style="color: white">Register</a>
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
         </div>
     </header>
+    <section class="dashboard-section">
+        <h1>Terms & Conditions</h1>
 
-    <section class="page-content">
-        <h2>Terms & Conditions</h2>
-        <p>Lorem ipsum dolor sit amet</p>
-    </section>
+        <h2>Introduction</h2>
+        <p>Welcome to Delulu Delata, your premier destination for high-quality canned goods. These Terms and Conditions ("Terms") govern your use of our website, mobile applications, and the purchase of our products. By accessing or using our services, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our website or purchase our products.</p>
 
-    <footer>
+        <h2>Use of Our Website</h2>
+        <p>Our website is provided for informational and e-commerce purposes. You may use our website to browse products, make purchases, and access account information. You agree not to use our website for any unlawful or prohibited purposes, including but not limited to:</p>
         <ul>
-            <li><a href="/terms">Terms & Conditions</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
+            <li>Violating any applicable laws or regulations</li>
+            <li>Transmitting harmful or malicious content</li>
+            <li>Interfering with the operation of our website</li>
+            <li>Attempting to gain unauthorized access to our systems</li>
         </ul>
-        <p>&copy; 2025 MoreRAM?. All rights reserved.</p>
-    </footer>
 
+        <h2>Product Purchases</h2>
+        <p>When you place an order with us, you agree that:</p>
+        <ul>
+            <li>All sales are final for canned goods unless otherwise stated</li>
+            <li>Prices are subject to change without prior notice</li>
+            <li>Delivery times may vary based on location and availability</li>
+            <li>We reserve the right to cancel orders due to inventory issues</li>
+            <li>Payment must be processed through approved methods</li>
+        </ul>
+
+        <h2>Refunds and Returns</h2>
+        <p>Due to the nature of our products, returns are generally not accepted. However, we strive for customer satisfaction and will consider refunds on a case-by-case basis for damaged or defective products. Please contact us within 7 days of delivery to report any issues.</p>
+
+        <h2>Intellectual Property</h2>
+        <p>All content on this website, including logos, text, images, and logos, is the property of Delulu Delata and is protected by intellectual property laws. You may not reproduce, distribute, or use our content without prior written permission.</p>
+
+        <h2>Privacy</h2>
+        <p>We are committed to protecting your privacy. Please review our Privacy Policy, which forms part of these Terms, to understand how we collect and use your personal information.</p>
+
+        <h2>Limitation of Liability</h2>
+        <p>In no event shall Delulu Delata be liable for any indirect, incidental, special, or consequential damages arising from your use of our website or products. Our total liability shall not exceed the amount paid for the products in question.</p>
+
+        <h2>Governing Law</h2>
+        <p>These Terms are governed by and construed in accordance with the laws of [Your Jurisdiction]. Any disputes arising from these Terms shall be resolved in the courts of [Your Jurisdiction].</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about these Terms and Conditions, please contact us at support@deluludelata.com or through our contact form.</p>
+
+        <p><em>These Terms were last updated on [Date].</em></p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
 </body>
 </html>

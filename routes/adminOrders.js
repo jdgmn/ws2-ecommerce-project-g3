@@ -36,4 +36,31 @@ router.get("/orders", isAdmin, async (req, res) => {
     res.status(500).send("Error loading orders.");
   }
 });
+// POST /admin/orders/update-status – update order status
+router.post("/orders/update-status", isAdmin, async (req, res) => {
+  try {
+    const { orderId, newStatus } = req.body;
+    if (!orderId || !newStatus) {
+      return res.status(400).send("Order ID and new status are required.");
+    }
+    const validStatuses = ["to_pay", "to_ship", "to_receive", "completed", "refund", "cancelled"];
+    if (!validStatuses.includes(newStatus)) {
+      return res.status(400).send("Invalid status.");
+    }
+    const db = req.app.locals.client.db(req.app.locals.dbName);
+    const ordersCollection = db.collection("orders");
+    const result = await ordersCollection.updateOne(
+      { orderId },
+      { $set: { orderStatus: newStatus, updatedAt: new Date() } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).send("Order not found.");
+    }
+    res.redirect("/admin/orders");
+  } catch (err) {
+    console.error("Error updating order status:", err);
+    res.status(500).send("Error updating order status.");
+  }
+});
+
 module.exports = router;

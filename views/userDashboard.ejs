@@ -1,62 +1,146 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <meta charset="UTF-8" />
-  </head>
-  <body>
-    <h1>User Dashboard</h1>
-    <section>
-      <h2>Welcome</h2>
-      <p>
-        <% if (user && user.firstName) { %> Hello,
-        <strong><%= user.firstName %> <%= user.lastName || "" %></strong> <% }
-        else { %> Hello, <strong><%= user.email %></strong>
-        <% } %>
-      </p>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .dashboard-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: var(--bg-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        .dashboard-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .welcome p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .order-summary table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .order-summary th, .order-summary td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .order-summary th {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .quick-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        .quick-links li {
+            margin-bottom: 0.5rem;
+        }
+        .quick-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .quick-links a:hover {
+            text-decoration: underline;
+        }
+        .status-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .status-item {
+            background: var(--accent-color);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .status-item .count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/user/dashboard" class="active">Dashboard</a></li>
+                <li><a href="/user/profile">Profile</a></li>
+                <li><a href="/user/orders">Orders</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <span>Welcome, <%= user.firstName %>!</span>
+            <a href="/users/logout">Logout</a>
+        </div>
+    </header>
+    <section class="dashboard-section welcome">
+        <h2>Welcome Back!</h2>
+        <p>Hello, <strong><%= user.firstName %> <%= user.lastName || "" %></strong> - Enjoy your canned goods adventure!</p>
     </section>
-    <section>
-      <h2>Order Summary</h2>
-      <p>Total Orders: <strong><%= totalOrders %></strong></p>
-      <table border="1" cellpadding="8" cellspacing="0">
-        <tr>
-          <th>Status</th>
-          <th>Count</th>
-        </tr>
-        <tr>
-          <td>To Pay</td>
-          <td><%= statusCounts.to_pay %></td>
-        </tr>
-        <tr>
-          <td>To Ship</td>
-          <td><%= statusCounts.to_ship %></td>
-        </tr>
-        <tr>
-          <td>To Receive</td>
-          <td><%= statusCounts.to_receive %></td>
-        </tr>
-        <tr>
-          <td>Completed</td>
-          <td><%= statusCounts.completed %></td>
-        </tr>
-        <tr>
-          <td>Return / Refund</td>
-          <td><%= statusCounts.refund %></td>
-        </tr>
-        <tr>
-          <td>Cancelled</td>
-          <td><%= statusCounts.cancelled %></td>
-        </tr>
-      </table>
+    <section class="dashboard-section order-summary">
+        <h2>Order Summary</h2>
+        <p>Total Orders: <strong><%= totalOrders %></strong></p>
+        <table>
+            <tr>
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+            <tr>
+                <td>To Pay</td>
+                <td><%= statusCounts.to_pay %></td>
+            </tr>
+            <tr>
+                <td>To Ship</td>
+                <td><%= statusCounts.to_ship %></td>
+            </tr>
+            <tr>
+                <td>To Receive</td>
+                <td><%= statusCounts.to_receive %></td>
+            </tr>
+            <tr>
+                <td>Completed</td>
+                <td><%= statusCounts.completed %></td>
+            </tr>
+            <tr>
+                <td>Return / Refund</td>
+                <td><%= statusCounts.refund %></td>
+            </tr>
+            <tr>
+                <td>Cancelled</td>
+                <td><%= statusCounts.cancelled %></td>
+            </tr>
+        </table>
     </section>
-    <section>
-      <h2>Quick Links</h2>
-      <ul>
-        <li><a href="/user/profile">Edit Profile</a></li>
-        <li><a href="/user/orders">View Purchase History</a></li>
-      </ul>
+    <section class="dashboard-section quick-links">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="/user/profile">Edit Profile</a></li>
+            <li><a href="/user/orders">View Purchase History</a></li>
+        </ul>
     </section>
-  </body>
-  
+    <footer>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
+</body>
 </html>
-

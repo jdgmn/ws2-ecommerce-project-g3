@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/styles/main.css" />
-  </head>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" /><h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
+        </div>
+    </header>
 
-  <body>
+    <!-- Registration Form -->
     <div class="form-container">
-      <h1>User Registration</h1>
+        <h1>Join Delulu Delata</h1>
 
-      <form action="/users/register" method="POST" class="registration-form">
-        <div class="form-group">
-          <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" name="firstName" required />
+        <% if (locals.error) { %>
+            <p class="form-error"><%= error %></p>
+        <% } %>
+
+        <form action="/users/register" method="POST" class="registration-form">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" value="<%= locals.firstName || '' %>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" value="<%= locals.lastName || '' %>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= locals.email || '' %>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+
+            <!-- Turnstile widget -->
+            <div class="cf-turnstile" data-sitekey="<%= process.env.TURNSTILE_SITEKEY %>"></div>
+
+            <!-- Turnstile script -->
+            <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+
+        <div class="login-links">
+            <p>Already have an account? <a href="/users/login">Login here</a></p>
         </div>
-
-        <div class="form-group">
-          <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" required />
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-
-        <!-- Turnstile widget -->
-        <div
-          class="cf-turnstile"
-          data-sitekey="<%= process.env.TURNSTILE_SITEKEY %>"
-        ></div>
-
-        <button type="submit" class="submit-btn">Register</button><br />
-
-        <script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-          async
-          defer
-        ></script>
-
-        <button onclick="history.back()">Go Back</button>
-      </form>
     </div>
-  </body>
+
+    <!-- Footer -->
+    <footer>
+        <ul>
+            <li><a href="/terms">Terms & Conditions</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
+</body>
 </html>
