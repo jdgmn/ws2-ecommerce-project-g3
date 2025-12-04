@@ -466,9 +466,15 @@ header .branding h1 a {
   font-weight: 600;
 }
 
+.user-table th:last-child,
+.user-table td:last-child {
+  min-width: 250px;
+  white-space: nowrap;
+}
+
 .btn-edit, .btn-delete, .btn-register, .btn-back {
   background: var(--secondary-color);
-  color: #fff;
+  color: #000;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.3rem;
