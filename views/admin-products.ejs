@@ -2,10 +2,11 @@
 <a href="/admin/products/new">Add New Product</a>
 <table border="1">
   <tr>
-    <th>Name</th><th>Description</th><th>Price</th><th>Image</th><th>Actions</th>
+    <th>Product ID</th><th>Name</th><th>Description</th><th>Price</th><th>Image</th><th>Actions</th>
   </tr>
   <% products.forEach(product => { %>
     <tr>
+      <td><%= product.productId || '' %></td>
       <td><%= product.name %></td>
       <td><%= product.description %></td>
       <td>₱<%= product.price.toFixed(2) %></td>

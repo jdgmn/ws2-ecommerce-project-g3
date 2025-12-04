@@ -16,10 +16,12 @@ router.get("/new", isAdmin, (req, res) => {
 });
 
 // Handle add product
+const { v4: uuidv4 } = require("uuid");
 router.post("/new", isAdmin, async (req, res) => {
   const db = req.app.locals.client.db(req.app.locals.dbName);
   const { name, description, price, imageUrl } = req.body;
   await db.collection("products").insertOne({
+    productId: uuidv4(),
     name,
     description,
     price: parseFloat(price),
@@ -42,9 +44,19 @@ router.get("/edit/:id", isAdmin, async (req, res) => {
 router.post("/edit/:id", isAdmin, async (req, res) => {
   const db = req.app.locals.client.db(req.app.locals.dbName);
   const { name, description, price, imageUrl } = req.body;
+  const product = await db.collection("products").findOne({ _id: new ObjectId(req.params.id) });
   await db.collection("products").updateOne(
     { _id: new ObjectId(req.params.id) },
-    { $set: { name, description, price: parseFloat(price), imageUrl, updatedAt: new Date() } }
+    {
+      $set: {
+        name,
+        description,
+        price: parseFloat(price),
+        imageUrl,
+        updatedAt: new Date(),
+        productId: product.productId || undefined
+      },
+    }
   );
   res.redirect("/admin/products");
 });

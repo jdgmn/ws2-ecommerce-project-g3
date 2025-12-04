@@ -13,6 +13,7 @@ app.use("/styles", express.static(path.join(__dirname, "styles")));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()); // <-- Added this line
 // view engine (ensure this exists)
 app.set("view engine", "ejs");
 // serve /public as static
