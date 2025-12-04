@@ -8,6 +8,7 @@ const saltRounds = 12;
 const { MongoClient } = require("mongodb");
 const { Resend } = require("resend");
 const resend = new Resend(process.env.RESEND_API_KEY);
+const isAdmin = require("../middleware/adminAuth");
 
 // mongoDB setup
 const uri = process.env.MONGO_URI;
@@ -222,10 +223,7 @@ router.get("/logout", (req, res) => {
 });
 
 // Admin view
-router.get("/admin", async (req, res) => {
-  if (!req.session.user || req.session.user.role !== "admin") {
-    return res.status(403).send("Access denied.");
-  }
+router.get("/admin", isAdmin, async (req, res) => {
   const db = req.app.locals.client.db(req.app.locals.dbName);
   const users = await db.collection("users").find().toArray();
   res.render("admin", {

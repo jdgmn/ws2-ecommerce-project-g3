@@ -44,10 +44,14 @@ const indexRoute = require("./routes/index");
 const usersRoute = require("./routes/users");
 const passwordRoute = require("./routes/password");
 const adminProductsRouter = require("./routes/adminProducts");
+const ordersRoute = require("./routes/orders");
+const adminOrdersRoute = require("./routes/adminOrders");
 app.use("/", indexRoute);
 app.use("/users", usersRoute);
 app.use("/password", passwordRoute);
 app.use("/admin/products", adminProductsRouter);
+app.use("/orders", ordersRoute);
+app.use("/admin", adminOrdersRoute);
 
 // MongoDB Setup
 const uri = process.env.MONGO_URI;

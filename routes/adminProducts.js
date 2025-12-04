@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { ObjectId } = require("mongodb");
-
-// Middleware to check admin
-function isAdmin(req, res, next) {
-  if (!req.session.user || req.session.user.role !== "admin") {
-    return res.status(403).send("Access denied.");
-  }
-  next();
-}
+const isAdmin = require("../middleware/adminAuth");
 
 // Show all products
 router.get("/", isAdmin, async (req, res) => {
