@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful - Delulu Delata</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 0 30px var(--glow-green);
+            border: 2px solid var(--primary-color);
+        }
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s ease-in-out;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        .success-container h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .success-container p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .success-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #333;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 20px var(--glow-gold);
+        }
+        .success-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px var(--glow-gold), 0 0 40px var(--glow-green);
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="branding">
+            <img src="/public/images/logo.png" alt="Delulu Delata Logo" />
+            <h1><a href="/">Delulu Delata</a></h1>
+            <p>Pag Delata ang Problema...</p>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="/users/login">Login</a> | <a href="/users/register">Register</a>
+        </div>
+    </header>
+
+    <div class="success-container">
+        <h1>Registration Successful!</h1>
+        <p>Welcome to Delulu Delata! Your account has been created successfully. You can now log in and explore our premium canned goods selection.</p>
+        <a href="/users/login" class="success-btn">Login Now</a>
+        <p style="margin-top: 2rem; color: var(--text-muted); font-size: 1rem;">Or <a href="/" style="color: var(--primary-color);">return to homepage</a></p>
+    </div>
+
+    <!-- Confetti Animation -->
+    <div class="confetti" id="confetti"></div>
+
+    <script>
+        // Simple confetti effect
+        function createConfettiPiece() {
+            const confettiPiece = document.createElement('div');
+            confettiPiece.classList.add('confetti-piece');
+            confettiPiece.style.left = Math.random() * 100 + 'vw';
+            confettiPiece.style.animationDelay = Math.random() * 3 + 's';
+            document.getElementById('confetti').appendChild(confettiPiece);
+
+            setTimeout(() => {
+                confettiPiece.remove();
+            }, 3000);
+        }
+
+        // Create confetti pieces every 200ms for 3 seconds
+        const confettiInterval = setInterval(createConfettiPiece, 200);
+        setTimeout(() => {
+            clearInterval(confettiInterval);
+        }, 3000);
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <ul>
+            <li><a href="/terms">Terms & Conditions</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+        <p>&copy; 2025 Delulu Delata. All rights reserved.</p>
+    </footer>
+</body>
+</html>

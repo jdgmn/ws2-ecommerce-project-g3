@@ -20,6 +20,11 @@ router.get("/register", (req, res) => {
   res.render("register", { title: "Register" });
 });
 
+// registration success page
+router.get("/registration-success", (req, res) => {
+  res.render("registration-success", { title: "Registration Successful" });
+});
+
 // Registration (POST)
 router.post("/register", async (req, res) => {
   //const token = req.body["cf-turnstile-response"];
@@ -64,10 +69,8 @@ router.post("/register", async (req, res) => {
     // Base URL: local (http://localhost:3000) or deployed
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     const verificationUrl = `${baseUrl}/users/verify/${token}`;
-    res.send(`
-      <h2>Registration Successful!</h2>`);
-    //<p>Please verify your account before logging in.</p>
-    //<p><a href="/users/verify/${token}">Click here to verify</a></p>`);
+    // Redirect to success page
+    res.redirect('/users/registration-success');
     // Send verification email using Resend
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL, // stored in .env
