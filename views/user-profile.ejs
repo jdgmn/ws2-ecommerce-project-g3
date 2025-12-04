@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <% if (updated) { %>
+    <p style="color: green">Profile updated successfully.</p>
+    <% } %>
+    <section>
+      <h2>Account Information</h2>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <% if (user.firstName || user.lastName) { %>
+      <p>
+        <strong>Name:</strong>
+        <%= user.firstName || "" %> <%= user.lastName || "" %>
+      </p>
+      <% } %>
+    </section>
+    <section>
+      <h2>Edit Contact Details</h2>
+      <form action="/user/profile" method="POST">
+        <p>
+          <label for="address">Address:</label><br />
+          <textarea id="address" name="address" rows="3" cols="40">
+<%= user.address || "" %></textarea
+          >
+        </p>
+        <p>
+          <label for="contactNumber">Contact Number:</label><br />
+          <input type="text" id="contactNumber" name="contactNumber" value="<%=
+          user.contactNumber || "" %>" />
+        </p>
+        <p>
+          <button type="submit">Save Profile</button>
+          <a href="/user/dashboard">Back to Dashboard</a>
+        </p>
+      </form>
+    </section>
+  </body>
+</html>
