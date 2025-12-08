@@ -23,7 +23,9 @@ router.get("/register", (req, res) => {
 
 // registration success page
 router.get("/registration-success", (req, res) => {
-  res.render("registration-success", { title: "Registration Successful" });
+  const verificationToken = req.session.verificationToken;
+  req.session.verificationToken = null; // Clear the token after displaying
+  res.render("registration-success", { title: "Registration Successful", verificationToken });
 });
 
 // Registration (POST)
@@ -70,6 +72,8 @@ router.post("/register", async (req, res) => {
     // Base URL: local (http://localhost:3000) or deployed
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     const verificationUrl = `${baseUrl}/users/verify/${token}`;
+    // Store token in session for display on success page
+    req.session.verificationToken = token;
     // Redirect to success page
     res.redirect('/users/registration-success');
     // Send verification email using Resend

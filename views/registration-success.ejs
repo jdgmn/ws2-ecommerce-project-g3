@@ -98,7 +98,15 @@
 
     <div class="success-container">
         <h1>Registration Successful!</h1>
-        <p>Welcome to Delulu Delata! Your account has been created successfully. You can now log in and explore our premium canned goods selection.</p>
+        <p>Welcome to Delulu Delata! Your account has been created successfully.</p>
+        <% if (verificationToken) { %>
+        <div style="background: var(--bg-secondary); border: 1px solid var(--primary-color); border-radius: 10px; padding: 1rem; margin: 1rem 0; text-align: left;">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">Verify Your Email</h3>
+            <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Please verify your email to activate your account. You can do this by clicking the verification link sent to your email.</p>
+            <p style="color: var(--text-muted); font-weight: bold;">Development Note:</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Since I do not own a registered domain, the email verification only works on my own email address. So in order to verify your email please navigate to this page: <a href="/users/verify/<%= verificationToken %>" style="color: var(--primary-color);">/users/verify/<%= verificationToken %></a></p>
+        </div>
+        <% } %>
         <a href="/users/login" class="success-btn">Login Now</a>
         <p style="margin-top: 2rem; color: var(--text-muted); font-size: 1rem;">Or <a href="/" style="color: var(--primary-color);">return to homepage</a></p>
     </div>
