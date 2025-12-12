@@ -238,6 +238,23 @@
             </div>
         </div>
 
+        <!-- Report Actions -->
+        <div class="report-actions" style="text-align: center; margin: 40px 0; padding: 25px; background: #2d3748; color: #e2e8f0; border-radius: 12px;">
+            <h3 style="color: #e2e8f0; margin-bottom: 15px;">Export Report Data</h3>
+            <p style="margin-bottom: 20px; opacity: 0.8;">Download filtered reports in Excel format or generate print-ready versions</p>
+            <div class="export-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="/admin/reports/sales/export/daily?<%= new URLSearchParams(filters) %>" class="export-btn" style="display: inline-block; background: #4299e1; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.3s;">
+                    📊 Daily Sales Excel
+                </a>
+                <a href="/admin/reports/sales/export/orders?<%= new URLSearchParams(filters) %>" class="export-btn" style="display: inline-block; background: #48bb78; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.3s;">
+                    📋 Detailed Orders Excel
+                </a>
+                <a href="/admin/reports/sales/print?<%= new URLSearchParams(filters) %>" class="export-btn" style="display: inline-block; background: #ed8936; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: background 0.3s;">
+                    🖨️ Print/Export PDF
+                </a>
+            </div>
+        </div>
+
         <!-- Daily Sales Table -->
         <div class="chart-container">
             <h3>Daily Sales Overview</h3>

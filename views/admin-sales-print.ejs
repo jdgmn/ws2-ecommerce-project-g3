@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Print Version</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        @media print {
+            body {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .print-header {
+                background: #f8f9fa;
+                padding: 15px;
+                border-bottom: 2px solid #333;
+                margin-bottom: 20px;
+            }
+
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                font-size: 11px;
+            }
+
+            .print-table th,
+            .print-table td {
+                border: 1px solid #333;
+                padding: 6px;
+                text-align: left;
+            }
+
+            .print-table th {
+                background: #e9ecef;
+                font-weight: bold;
+            }
+
+            .summary-cards {
+                display: flex;
+                justify-content: space-around;
+                margin: 20px 0;
+                gap: 15px;
+            }
+
+            .summary-card {
+                flex: 1;
+                text-align: center;
+                padding: 15px;
+                border: 1px solid #333;
+                background: #f8f9fa;
+            }
+
+            .summary-value {
+                font-size: 18px;
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .summary-label {
+                font-size: 11px;
+                opacity: 0.8;
+            }
+        }
+
+        /* Screen styles */
+        .print-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .print-actions {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .btn-print {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .btn-print:hover {
+            background: var(--secondary-color);
+        }
+
+        .print-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .summary-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .print-table th,
+        .print-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .print-table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .print-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">
+        <!-- Print Actions -->
+        <div class="no-print print-actions">
+            <button onclick="window.print()" class="btn-print">Print Report</button>
+            <a href="/admin/reports/sales" class="btn-print" style="color: white; text-decoration: none; display: inline-block;">Back to Report</a>
+        </div>
+
+        <!-- Report Header -->
+        <div class="print-header">
+            <h1><%= title %></h1>
+            <p><strong>Generated on:</strong> <%= new Date().toLocaleString() %></p>
+            <p><strong>Filters:</strong> <%= filterSummary %></p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="summary-value"><%= summary.totalOrders %></div>
+                <div class="summary-label">Total Orders</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value">₱<%= summary.totalRevenue.toFixed(2) %></div>
+                <div class="summary-label">Total Revenue</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value">₱<%= summary.avgOrderValue.toFixed(2) %></div>
+                <div class="summary-label">Avg Order Value</div>
+            </div>
+        </div>
+
+        <!-- Daily Sales Table -->
+        <h2 style="color: var(--primary-color); margin-top: 40px;">Daily Sales Summary</h2>
+        <% if (dailySales.length > 0) { %>
+        <table class="print-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% dailySales.forEach(day => { %>
+                <tr>
+                    <td><%= new Date(day.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %></td>
+                    <td>₱<%= Number(day.revenue).toFixed(2) %></td>
+                </tr>
+                <% }) %>
+                <!-- Total row -->
+                <tr style="background: #2d3748; color: white;">
+                    <td style="font-weight: bold;">TOTAL</td>
+                    <td style="font-weight: bold;">₱<%= dailySales.reduce((sum, day) => sum + Number(day.revenue), 0).toFixed(2) %></td>
+                </tr>
+            </tbody>
+        </table>
+        <% } else { %>
+        <p style="text-align: center; color: var(--text-muted); padding: 40px;">No sales data available for the selected period.</p>
+        <% } %>
+    </div>
+
+    <script>
+        // Auto-print on load if in print mode
+        if (new URLSearchParams(window.location.search).has('print')) {
+            window.onload = function() {
+                window.print();
+            };
+        }
+    </script>
+</body>
+</html>

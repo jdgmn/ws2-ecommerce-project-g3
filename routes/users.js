@@ -49,16 +49,29 @@ router.post("/register", async (req, res) => {
     // 2. Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     const currentDate = new Date();
-    // 3. Create verification token
+    // 3. Get selected role (with validation)
+    const selectedRole = req.body.role;
+    if (!selectedRole || !['customer', 'admin'].includes(selectedRole)) {
+      return res
+        .status(400)
+        .render("register", {
+          error: "Invalid role selection.",
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email
+        });
+    }
+
+    // 4. Create verification token
     const token = uuidv4();
-    // 4. Build new user object
+    // 5. Build new user object
     const newUser = {
       userId: uuidv4(), // unique ID for the user
       firstName: req.body.firstName, // from form input
       lastName: req.body.lastName,
       email: req.body.email,
       passwordHash: hashedPassword, // never store plain text password
-      role: "customer", // default role
+      role: selectedRole, // selected role from form
       accountStatus: "active",
       isEmailVerified: false, // must be verified before login
       verificationToken: token, // link user to verification
@@ -133,14 +146,13 @@ router.get("/edit/:id", async (req, res) => {
 // handle update form
 router.post("/edit/:id", async (req, res) => {
   try {
-    await client.connect();
-    const db = client.db(dbName);
+    const db = req.app.locals.client.db(req.app.locals.dbName);
     const usersCollection = db.collection("users");
     await usersCollection.updateOne(
       { _id: new ObjectId(req.params.id) },
-      { $set: { name: req.body.name, email: req.body.email } }
+      { $set: { firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email } }
     );
-    res.redirect("/users/list");
+    res.redirect("/users/admin");
   } catch (err) {
     console.error("Error updating user:", err);
     res.send("Something went wrong.");

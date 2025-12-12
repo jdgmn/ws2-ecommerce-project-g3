@@ -55,6 +55,14 @@
                 <input type="password" id="password" name="password" required />
             </div>
 
+            <div class="form-group">
+                <label for="role">I want to register as:</label>
+                <select id="role" name="role" required>
+                    <option value="customer" selected>Customer (Browse & Purchase Products)</option>
+                    <option value="admin">Admin (Manage Store)</option>
+                </select>
+            </div>
+
             <!-- Turnstile widget -->
             <div class="cf-turnstile" data-sitekey="<%= process.env.TURNSTILE_SITEKEY %>"></div>
 
