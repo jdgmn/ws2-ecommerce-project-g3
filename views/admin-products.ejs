@@ -26,10 +26,19 @@
             <a href="/users/logout">Logout</a>
         </div>
     </header>
+
     <section class="dashboard-section">
         <h1>Product Management</h1>
         <div class="action-links" style="text-align: center; margin-bottom: 20px;">
             <a href="/admin/products/new" class="submit-btn">Add New Product</a>
+        </div>
+        <div class="search-form" style="margin-bottom: 20px;">
+            <form action="/admin/products" method="GET" class="search-form" style="display: flex; gap: 10px; align-items: center; justify-content: center;">
+                <input type="text" name="name" placeholder="Search by name" value="<%= name || '' %>" style="padding: 8px; width: 200px;" />
+                <input type="text" name="category" placeholder="Search by category" value="<%= category || '' %>" style="padding: 8px; width: 200px;" />
+                <button type="submit" class="btn-search" style="padding: 8px 15px;">Search</button>
+                <a href="/admin/products" class="btn-clear" style="padding: 8px 15px; text-decoration: none;">Clear</a>
+            </form>
         </div>
         <% if (products && products.length > 0) { %>
         <table class="user-table">

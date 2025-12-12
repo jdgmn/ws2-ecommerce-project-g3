@@ -155,7 +155,7 @@ let failedOrders = statusCounts.refund + statusCounts.cancelled;
             <tbody>
                 <% orders.forEach(order => { %>
                 <tr>
-                    <td><%= order.orderId %></td>
+                    <td>#<%= order.orderId.slice(-8) %></td>
                     <td><%= order.userEmail %></td>
                     <td>₱<%= Number(order.totalAmount || 0).toFixed(2) %></td>
                     <td><%= order.orderStatus %></td>

@@ -42,6 +42,10 @@
                 <label for="price">Price (₱):</label>
                 <input type="number" id="price" name="price" step="0.01" value="<%= product.price %>" required />
             </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" value="<%= product.category || '' %>" />
+            </div>
             <% if (product.imageUrl) { %>
             <div class="form-group">
                 <label>Current Image:</label>
